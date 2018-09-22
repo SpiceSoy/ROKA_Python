@@ -6,16 +6,25 @@
         {
             "label": "Set Email",
             "type": "shell",
-            "command": "git config --global user.email \"aksghkgh12@gmail.com\""
+            "command": "git config --global user.email \"aksghkgh12@gmail.com\"",
+            "presentation": {
+                "reveal": "never"
+            },
+            "problemMatcher": []
         },
         {
             "label": "Set Name",
             "type": "shell",
-            "command": "git config --global user.name \"SpiceSoy\""
+            "command": "git config --global user.name \"SpiceSoy\"",
+            "presentation": {
+                "reveal": "never"
+            },
+            "problemMatcher": []
         },
         {
             "label": "Git Setting",
-            "dependsOn": ["Set Email", "Set Name"]
+            "dependsOn": ["Set Email", "Set Name"],
+            "problemMatcher": []
         }
     ]
 }

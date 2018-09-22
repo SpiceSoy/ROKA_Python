@@ -2,5 +2,6 @@
     "terminal.integrated.env.windows": 
     {
         "path": "${env:Path};C:\\Python\\;C:\\Program Files\\Git\\cmd"        
-    }
+    },
+    "python.linting.enabled": false
 }
