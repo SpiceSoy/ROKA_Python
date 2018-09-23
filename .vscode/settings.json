@@ -3,5 +3,6 @@
     {
         "path": "${env:Path};C:\\Program Files\\Python37-32\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\Python37-32\\Lib;C:\\Program Files\\Python37-32\\Scripts"        
     },
-    "python.linting.enabled": false
+    "python.linting.enabled": false,
+    "git.autofetch":true
 }
