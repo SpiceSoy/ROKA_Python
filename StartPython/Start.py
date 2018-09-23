@@ -1,1 +1,1 @@
-print("Start::Python\n" * 50)
+print("Start::Python\n" * 2)
