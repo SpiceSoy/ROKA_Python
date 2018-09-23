@@ -22,8 +22,17 @@
             "problemMatcher": []
         },
         {
-            "label": "Git Setting",
-            "dependsOn": ["Set Email", "Set Name"],
+            "label": "Set pip",
+            "type": "shell",
+            "command": "pip install -r ..\\ROKA_Python\\Utill\\requirements.txt",
+            "presentation": {
+                "reveal": "never"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Fisrt Setting",
+            "dependsOn": ["Set Email", "Set Name","Set pip"],
             "problemMatcher": []
         }
     ]
