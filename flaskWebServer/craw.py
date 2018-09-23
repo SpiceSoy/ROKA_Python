@@ -1,4 +1,3 @@
-# base.py
 import requests
 from bs4 import BeautifulSoup
 
@@ -21,7 +20,3 @@ def GetRuliWebPS4(page):
     #     # Tag안의 텍스트 , 속성 가져오기
     #     print(title.text + " : " + title.get('href'))
     return my_titles
-
-pageNum = input("따올 페이지를 선택하세요 : ")
-for i in range(1,int(pageNum)):
-    GetRuliWebPS4(int(i))

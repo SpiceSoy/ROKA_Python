@@ -1,1 +1,2 @@
-print("Start::Python\n" * 2 * 3)
+import mod
+mod.printkk()
