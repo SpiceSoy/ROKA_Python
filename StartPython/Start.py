@@ -1,1 +1,1 @@
-print("Start::Python\n" * 2)
+print("Start::Python\n" * 2 * 3)
