@@ -1,8 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
-{% for title in GetRuliWebPS4(page)%}
-  <div class="jumbo">
-    <h3>{{title.text}}<h3>
-    <h4>{{title.href}}</h4>
+<div class="CommicTitle">
+  <h1>{{commictTitle}}</h1>
+</div>
+{% for title in postList%}
+  <div class="jumbo" >
+    <h3><a href="{{title.get('href')}}">{{loop.index}} : {{title.text}}</a></h3>
   </div>
+{% endfor %}
+
 {% endblock %}

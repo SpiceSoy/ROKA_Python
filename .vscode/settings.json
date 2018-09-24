@@ -5,5 +5,12 @@
     },
     "python.linting.enabled": false,
     "git.autofetch":true,
-    "python.pythonPath": "C:\\Program Files\\Python37-32\\" 
+    "python.pythonPath": "C:\\Program Files\\Python37-32\\",
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.defaultLanguage": "",
+    "code-runner.fileDirectoryAsCwd": false,
+    "code-runner.saveAllFilesBeforeRun": true,
+    "files.encoding": "utf8",
+    "code-runner.runInTerminal": true,
+    "code-runner.respectShebang": false
 }
