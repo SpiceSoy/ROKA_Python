@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+<div style="text-align: center;padding-top: 10px;padding-bottom: 10px;">
+        {% if currentPage > 1 %}
+            <span style="font-size: 20pt;padding-left: 10px;padding-right: 10px;" onclick="location.href='/{{currentPage - 1}}'">
+            이전페이지
+        </span>
+        {%else%}
+        <span style="font-size: 20pt;padding-left: 10px;padding-right: 10px;color: lightgray;">
+            이전페이지
+        </span>
+        {% endif %}
+        <span style="font-size: 30pt;padding-left: 10px;padding-right: 10px;">
+            {{ currentPage }}
+        </span>
+        <span style="font-size: 20pt;padding-left: 10px;padding-right: 10px;" onclick="location.href='/{{currentPage + 1}}'">
+            다음페이지
+        </span>
+    </div>
+{% for article in postList%}
+<div class="cssPostList{{loop.index % 2}}"  onClick="location.href = '/read/{{ article.select_one('div > a' ).get('href').split('/')[-1] }}'">
+  <img style="width: 100px;height: 100px; float:left" src = "{{ article.select_one('div > a > img' ).get('src') }}" >
+  <div  style="width:auto;height:100px;">
+    <div style="width: 100%">
+      <span>
+        <a>
+          <strong>
+            {{ article.select_one('div > div > a > strong').text }}
+          </strong>
+        </a>
+        <span style="float: right;">
+            {{ article.select('div > div > span')[1].text + ' ' + article.select('div > div > span')[0].text }}
+        </span>
+      </span>
+      <div>
+      </div>
+    </div>
+
+      <div>
+          {{ article.select_one('div > div > a > span').text }}
+      </div>
+
+  </div>
+</div>
+{% endfor %}
+<div style="text-align: center;padding-top: 10px;padding-bottom: 10px;">
+    {% if currentPage > 1 %}
+        <span style="font-size: 20pt;padding-left: 10px;padding-right: 10px;" onclick="location.href='/{{currentPage - 1}}'">
+        이전페이지
+    </span>
+    {%else%}
+    <span style="font-size: 20pt;padding-left: 10px;padding-right: 10px;color: lightgray;">
+        이전페이지
+    </span>
+    {% endif %}
+    <span style="font-size: 30pt;padding-left: 10px;padding-right: 10px;">
+        {{ currentPage }}
+    </span>
+    <span style="font-size: 20pt;padding-left: 10px;padding-right: 10px;" onclick="location.href='/{{currentPage + 1}}'">
+        다음페이지
+    </span>
+</div>
+{% endblock %}

@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Flask App</title>    
+    <title>Soy Flask Study</title>    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   </head>
   <body>
    
     <header>
       <div class="container">
-        <h1 class="logo">Flask App</h1>
+        <h1 class="logo" onclick="location.href='/'"> Soy Flask Study </h1>
       </div>
     </header> 
+    <table id="Top" onclick="location.href='#'">
+      <tr>
+        <td style="color:white;">
+          TOP
+        </td>
+      </tr>
+    </table>
      
     <div class="container">
       {% block content %}

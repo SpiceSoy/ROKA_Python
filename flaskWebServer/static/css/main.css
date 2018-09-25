@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #444;
+    color: #444444;
   }
    
   /*
@@ -37,6 +37,7 @@ body {
   .container {
     width: 940px;
     margin: 0 auto;
+    background-color: lightgray;
   }
    
   div.jumbo {
@@ -61,4 +62,25 @@ body {
     text-align: center;
     letter-spacing: -1px;
     color: #999;
+  }
+  #Top {
+    position: fixed; /* 포지션 고정 */ 
+    width: 50px;
+    height: 50px;
+    background-color: #2B2B2B;
+    text-align: center;
+    vertical-align: middle;
+    right: 100px;
+    bottom: 100px; /* 밑에서 100px */ 
+    z-index: 9999; /* 포지션을 먼저 지정후 z-좌표(레이어) : 9999입니다. */
+  }
+
+  /* list 단 */
+  .cssPostList1{
+    align-items: left;
+    background-color: lightgray;
+  }
+  .cssPostList0{
+    align-items: left;
+    background-color: white;
   }

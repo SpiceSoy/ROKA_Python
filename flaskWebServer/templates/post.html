@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div>
+    <h1> {{ post.select_one('.news_title').text }} </h1>
+    <h6> {{ post.select_one('.news_info').text }}</h6>
+    <hr/>
+</div>
+<div>
+    <table style="border: 1px black solid;width: 100%;">
+        {% autoescape false %}
+        {{post.select_one('.tbl_view > thead')}}
+        {{post.select_one('.tbl_view > tbody')}}
+        {% endautoescape %}
+    </table>
+</div>
+<div>
+    {% autoescape false %}
+    {{ post.select_one('.news_content_wrapper') }}
+    {% endautoescape %}
+</div>
+
+<div style="text-align: center;font-size: 25pt;background-color: gray;width: 100%;" onclick="history.back()">
+    뒤로 가기
+</div>
+
+{% endblock %}

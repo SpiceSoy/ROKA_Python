@@ -17,7 +17,11 @@ def GetRuliNews(page):
     #     # Tag안의 텍스트 , 속성 가져오기
     #     print(title.text + " : " + title.get('href'))
     return my_article
-    #vContent > div:nth-child(5) > font:nth-child(1) > span:nth-child(1) > a:nth-child(1)
-    #vContent > div:nth-child(3) > span:nth-child(1) > a:nth-child(1)
-    #vContent > div:nth-child(9) > div:nth-child(1) > span:nth-child(1) > a:nth-child(1)
-    #vContent > div:nth-child(3) > span:nth-child(1) > a:nth-child(1)
+
+def GetRuliPost(id):
+    req = requests.get('https://bbs.ruliweb.com/news/read/' + str(id))
+    html = req.text
+
+    soup = BeautifulSoup(html,'html.parser')
+    post_html = soup.select_one('.center_inner')
+    return post_html
