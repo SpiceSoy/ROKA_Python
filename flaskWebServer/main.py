@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from craw import GetCommicList
+from craw import GetRuliNews
 
  
 app = Flask(__name__)      
@@ -9,12 +9,10 @@ app = Flask(__name__)
 def home():
   return render_template('home.html')
 
-@app.route('/<int:uid>')
-def GetPages(uid):
-  temp = GetCommicList(uid)
-  commictTitle = temp[0]
-  postList = temp[1]
-  return render_template('home.html',commictTitle=commictTitle,postList=postList)
+@app.route('/<int:page>')
+def GetPages(page):
+  postList = GetRuliNews(page)
+  return render_template('home.html',postList=postList)
 
  
 if __name__ == '__main__':

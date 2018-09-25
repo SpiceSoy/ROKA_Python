@@ -1,12 +1,30 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="CommicTitle">
-  <h1>{{commictTitle}}</h1>
-</div>
-{% for title in postList%}
-  <div class="jumbo" >
-    <h3><a href="{{title.get('href')}}">{{loop.index}} : {{title.text}}</a></h3>
+{% for article in postList%}
+<div id = "{{loop.index}}" style= "align-items: left;"  onClick="location.href = '{{ article.select_one('div > a' ).get('href') }}'">
+  <img style="width: 100px;height: 100px; float:left" src = "{{ article.select_one('div > a > img' ).get('src') }}" >
+  <div style="width:auto;height:100px;">
+    <div style="width: 100%">
+      <span style="">
+        <a>
+          <strong>
+            {{ article.select_one('div > div > a > strong').text }}
+          </strong>
+        </a>
+        <span style="float: right;">
+            {{ article.select('div > div > span')[1].text + ' ' + article.select('div > div > span')[0].text }}
+        </span>
+      </span>
+      <div>
+      </div>
+    </div>
+
+      <div>
+          {{ article.select_one('div > div > a > span').text }}
+      </div>
+
   </div>
+</div>
 {% endfor %}
 
 {% endblock %}
