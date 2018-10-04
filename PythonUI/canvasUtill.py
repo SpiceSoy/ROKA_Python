@@ -1,3 +1,5 @@
+from positionUtill import InversionPosition
+
 class CanvasRectSetting:
     def __init__(self,marginX,marginY,rectSize,rectMax):
             self.marginX = marginX
