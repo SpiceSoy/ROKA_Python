@@ -33,10 +33,12 @@ class Rect:
         self.__drawInCanvas()
     def isClicked(self,event,state):
         self.tileNode.changeState(state)
-        self.Refresh()
+        # self.Refresh()
     def reset(self):
         self.tileNode.reset()
-        self.Refresh()
+        # self.Refresh()
+    def getRefresher(self):
+        return self.Refresh
 
 class RectContainer:
     def __init__(self,canvas,canvasRectSetting,naviTileContainer):
@@ -48,14 +50,15 @@ class RectContainer:
         self.rectContainer = list()
         for i in range(self.canvasRectSetting.maxX * self.canvasRectSetting.maxY):
             self.rectContainer.append( Rect(i,self.targetCanvas,self.canvasRectSetting,self.naviTileContainer.getIndex(i)) )
+            self.naviTileContainer.getIndex(i).SetRefresher(self.getIndex(i).getRefresher())
     def getPosition(self,x,y):
         return self.rectContainer[y*canvasRectSetting.maxY + x]
     def getIndex(self,index):
         return self.rectContainer[index]
     def GetClickedObject(self,x,y):
-        return self.getIndex(checkClickedIndex(x,y,self.canvasRectSetting))
+            return self.getIndex(checkClickedIndex(x,y,self.canvasRectSetting))
     def isClicked(self,event,state):
-        self.GetClickedObject(event.x,event.y).isClicked(event,state)
+            self.GetClickedObject(event.x,event.y).isClicked(event,state)
     def reset(self):
         for rect in self.rectContainer:
             rect.reset()

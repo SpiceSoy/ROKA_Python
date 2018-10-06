@@ -22,7 +22,7 @@ def checkClickedPosition(x,y,canvasRectSetting):
         yIndex = -1
     return {'x':xIndex,'y':yIndex}
 def isPositionValid(checkList):
-    return (checkList['x'] != -1 or checkList['y'] != -1)
+    return (checkList['x'] != -1 and checkList['y'] != -1)
 def checkClickedIndex(x,y,canvasRectSetting):
     position = checkClickedPosition(x,y,canvasRectSetting)
     return positionToIndex(position['x'],position['y'],canvasRectSetting.maxX,canvasRectSetting.maxY)

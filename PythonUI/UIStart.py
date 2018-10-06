@@ -52,10 +52,19 @@ def canavsClicked(event):
         + str(temp['x']) +" , " + str(temp['y']) + "위치의 사각형 클릭" )
     if editMode.state != EditState['noneEdit']:
         rectContainer.isClicked(event,editMode.state)
+def canvasMotioned(event):
+
+    temp = checkClickedPosition(event.x,event.y,canvasRectSetting)
+    clickDebugText.configure(
+        text = str(event.x) + " , " + str(event.y) + " 위치 클릭 \n " 
+        + str(temp['x']) +" , " + str(temp['y']) + "위치의 사각형 위로 마우스 클릭 이동 중" )
+    if editMode.state == EditState['editBrick'] or editMode.state == EditState['editDefault']:
+        rectContainer.isClicked(event,editMode.state)
         
 
 
 drawCanvas.bind("<Button-1>",canavsClicked)
+drawCanvas.bind("<B1-Motion>",canvasMotioned)
 
 #스타트 버튼 생성
 startButton = Button(toolFrame,text="시작")
