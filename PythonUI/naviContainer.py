@@ -1,8 +1,8 @@
 from positionUtill import *
 
-NodeState = {'default':0,'brick':1,'startPoint':2,'goalPoint':3}
-StatePassable = {0:True,1:False,2:True,3:True}
-StateColor = {0:'white',1:'gray',2:'lightgreen',3:'gold'}
+NodeState = {'default':0,'brick':1,'startPoint':2,'goalPoint':3 , 'passedPoint':4}
+StatePassable = {0:True,1:False,2:True,3:True,4:False}
+StateColor = {0:'white',1:'gray',2:'lightgreen',3:'gold',4:'aqua'}
 
 def defaultRefreshFunc():
     return None
@@ -28,13 +28,12 @@ class naviNode:
         self.refreshFunc = refreshFunc
 
 class naviTile(naviNode):
-    def __init__(self,index,maxX,maxY,state = NodeState['default']):
+    def __init__(self,index,maxPosition,state = NodeState['default']):
         super().__init__(state)
-        self.x = indexToPosition(index,maxX,maxY)['x']
-        self.y = indexToPosition(index,maxX,maxY)['y']
+        self.position = indexToPosition(index,maxPosition)
         self.index = index
     def getPosition(self):
-        return {'x':self.x,'y':self.y}
+        return self.position
 
 #StartPoint 와 GoalPoint 갯수를 한정하기 위한 플래그입니다.
 class NowPoint:
@@ -53,17 +52,20 @@ def isChangeState(state,node):
 
 
 class NaviTileContainer:
-    def __init__(self,maxX,maxY):
-        self.maxX = maxX
-        self.maxY = maxY
-        self.__containerInitialize(maxX,maxY)
-    def __containerInitialize(self,maxX,maxY):
+    def __init__(self,maxPosition):
+        self.maxPosition = maxPosition
+        self.__containerInitialize()
+    def __containerInitialize(self):
         self.nodeContainer = list()
-        for i in range(0,maxX*maxY):
-            self.nodeContainer.append( naviTile(i,maxX,maxY))
-    def getPosition(self,x,y):
-        return self.nodeContainer[y*maxY + x]
+        for i in range(0,self.maxPosition.x*self.maxPosition.y):
+            self.nodeContainer.append( naviTile(i,self.maxPosition))
     def getIndex(self,index):
         return self.nodeContainer[index]
-    
+    def getPosition(self,position):
+        return getIndex(position.toIndex(self.maxPosition))
+    def getStartPoint(self):
+        return nowPoint.nowStartPoint
+    def getGoalPoint(self):
+        return nowPoint.nowGoalPoint
+
     

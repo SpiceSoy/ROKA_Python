@@ -2,27 +2,19 @@ from positionUtill import *
 
 class CanvasRectSetting:
     def __init__(self,marginX,marginY,rectSize,maxX,maxY):
-            self.marginX = marginX
-            self.marginY = marginY
+            self.margin = Position(marginX,marginY)
             self.rectSize = rectSize
-            self.maxX = maxX
-            self.maxY = maxY
+            self.maxPosition = Position(maxX,maxY)
 
-def checkClickedPosition(x,y,canvasRectSetting):
+def checkClickedPosition(position,canvasRectSetting):
     # canvasRectSetting = CanvasRectSetting(canvasRectSetting)
-    x = x - canvasRectSetting.marginX 
-    y = y - canvasRectSetting.marginY
-    xIndex = x // canvasRectSetting.rectSize
-    yIndex = y // canvasRectSetting.rectSize
-    if canvasRectSetting.maxX <= xIndex or xIndex < 0 :
-        xIndex = -1
-        yIndex = -1
-    if canvasRectSetting.maxY <= yIndex or yIndex < 0 :
-        xIndex = -1
-        yIndex = -1
-    return {'x':xIndex,'y':yIndex}
-def isPositionValid(checkList):
-    return (checkList['x'] != -1 and checkList['y'] != -1)
-def checkClickedIndex(x,y,canvasRectSetting):
-    position = checkClickedPosition(x,y,canvasRectSetting)
-    return positionToIndex(position['x'],position['y'],canvasRectSetting.maxX,canvasRectSetting.maxY)
+    position.x = position.x - canvasRectSetting.margin.x
+    position.y = position.y - canvasRectSetting.margin.y
+    index = Position(position.x // canvasRectSetting.rectSize , position.y // canvasRectSetting.rectSize)
+    if canvasRectSetting.maxPosition.x <= index.x or index.x < 0 or canvasRectSetting.maxPosition.y <= index.y or index.y < 0 :
+        index.x = -1
+        index.y = -1
+    return index
+def checkClickedIndex(position,canvasRectSetting):
+    position = checkClickedPosition(position,canvasRectSetting)
+    return position.toIndex(canvasRectSetting.maxPosition)

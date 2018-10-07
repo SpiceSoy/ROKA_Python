@@ -20,7 +20,7 @@ canvasRectSetting = CanvasRectSetting(15,15,30,25,25)
 editMode = EditMode(EditState['noneEdit'])
 
 #naviContainer 생성
-naviTileContainer = NaviTileContainer(canvasRectSetting.maxX,canvasRectSetting.maxY)
+naviTileContainer = NaviTileContainer(canvasRectSetting.maxPosition)
 #RectContainer 생성
 rectContainer = RectContainer(drawCanvas,canvasRectSetting,naviTileContainer)
 
@@ -45,19 +45,19 @@ clickDebugText.pack(fill='x')
 
 #캔버스 클릭 지정
 def canavsClicked(event):
-    temp = checkClickedPosition(event.x,event.y,canvasRectSetting)
+    temp = checkClickedPosition(Position(event.x,event.y),canvasRectSetting)
     
     clickDebugText.configure(
         text = str(event.x) + " , " + str(event.y) + " 위치 클릭 \n " 
-        + str(temp['x']) +" , " + str(temp['y']) + "위치의 사각형 클릭" )
+        + str(temp.x) +" , " + str(temp.y) + "위치의 사각형 클릭" )
     if editMode.state != EditState['noneEdit']:
         rectContainer.isClicked(event,editMode.state)
 def canvasMotioned(event):
 
-    temp = checkClickedPosition(event.x,event.y,canvasRectSetting)
+    temp = checkClickedPosition(Position(event.x,event.y),canvasRectSetting)
     clickDebugText.configure(
         text = str(event.x) + " , " + str(event.y) + " 위치 클릭 \n " 
-        + str(temp['x']) +" , " + str(temp['y']) + "위치의 사각형 위로 마우스 클릭 이동 중" )
+        + str(temp.x) +" , " + str(temp.y) + "위치의 사각형 위로 마우스 클릭 이동 중" )
     if editMode.state == EditState['editBrick'] or editMode.state == EditState['editDefault']:
         rectContainer.isClicked(event,editMode.state)
         

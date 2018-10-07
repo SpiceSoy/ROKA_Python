@@ -11,24 +11,22 @@ class Rect:
         self.tileNode = tileNode
         self.targetCanvas = canvas
         self.canvasRectSetting = canvasRectSetting
-        self.index = index
-        tempPosition = indexToPosition(index,canvasRectSetting.maxX,canvasRectSetting.maxY)
-        self.xIndex = tempPosition['x']
-        self.yIndex = tempPosition['y']
+        self.index = index 
+        self.position = indexToPosition(index,canvasRectSetting.maxPosition)
         self.__drawInCanvas()
 
     def __drawInCanvas(self):
             self.targetCanvas.create_rectangle(
-            self.canvasRectSetting.marginX + self.xIndex * self.canvasRectSetting.rectSize,
-            self.canvasRectSetting.marginY + self.yIndex * self.canvasRectSetting.rectSize,
-            self.canvasRectSetting.marginX + (self.xIndex * self.canvasRectSetting.rectSize) + self.canvasRectSetting.rectSize,
-            self.canvasRectSetting.marginY + (self.yIndex * self.canvasRectSetting.rectSize) + self.canvasRectSetting.rectSize,
+            self.canvasRectSetting.margin.x + self.position.x * self.canvasRectSetting.rectSize,
+            self.canvasRectSetting.margin.y + self.position.y * self.canvasRectSetting.rectSize,
+            self.canvasRectSetting.margin.x + (self.position.x * self.canvasRectSetting.rectSize) + self.canvasRectSetting.rectSize,
+            self.canvasRectSetting.margin.y + (self.position.y * self.canvasRectSetting.rectSize) + self.canvasRectSetting.rectSize,
             fill = self.tileNode.getColor()
             )
     def __getCenterPointX(self):
-            return self.marginX + (self.tileNode.getPosition()['x'] * self.canvasRectSetting.rectSize) + (self.canvasRectSetting.rectSize/2)
+            return self.marginX + (self.tileNode.getPosition().x * self.canvasRectSetting.rectSize) + (self.canvasRectSetting.rectSize/2)
     def __getCenterPointY(self):
-            return self.marginY + (self.tileNode.getPosition()['y'] * self.canvasRectSetting.rectSize) + (self.canvasRectSetting.rectSize/2)
+            return self.marginY + (self.tileNode.getPosition().y * self.canvasRectSetting.rectSize) + (self.canvasRectSetting.rectSize/2)
     def Refresh(self):
         self.__drawInCanvas()
     def isClicked(self,event,state):
@@ -45,20 +43,20 @@ class RectContainer:
         self.targetCanvas = canvas
         self.canvasRectSetting = canvasRectSetting
         self.naviTileContainer = naviTileContainer
-        self.__containerInitialize(canvasRectSetting.maxX,canvasRectSetting.maxY)
-    def __containerInitialize(self,maxX,maxY):
+        self.__containerInitialize()
+    def __containerInitialize(self):
         self.rectContainer = list()
-        for i in range(self.canvasRectSetting.maxX * self.canvasRectSetting.maxY):
+        for i in range(self.canvasRectSetting.maxPosition.x * self.canvasRectSetting.maxPosition.y):
             self.rectContainer.append( Rect(i,self.targetCanvas,self.canvasRectSetting,self.naviTileContainer.getIndex(i)) )
             self.naviTileContainer.getIndex(i).SetRefresher(self.getIndex(i).getRefresher())
-    def getPosition(self,x,y):
-        return self.rectContainer[y*canvasRectSetting.maxY + x]
+    def getPosition(self,position):
+        return self.rectContainer[position.y*canvasRectSetting.maxPosition.y + position.x]
     def getIndex(self,index):
         return self.rectContainer[index]
-    def GetClickedObject(self,x,y):
-            return self.getIndex(checkClickedIndex(x,y,self.canvasRectSetting))
+    def GetClickedObject(self,position):
+            return self.getIndex(checkClickedIndex(position,self.canvasRectSetting))
     def isClicked(self,event,state):
-            self.GetClickedObject(event.x,event.y).isClicked(event,state)
+            self.GetClickedObject(Position(event.x,event.y)).isClicked(event,state)
     def reset(self):
         for rect in self.rectContainer:
             rect.reset()
