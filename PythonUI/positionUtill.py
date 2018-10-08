@@ -8,6 +8,8 @@ class Position:
         self.x = x
         self.y = y
     def isValid(self,maxPosition):
-        return (self.x < 0 or self.x>= maxPosition.x or self.y < 0 or self.y >= maxPosition.y)
+        return not (self.x < 0 or self.x >= maxPosition.x or self.y < 0 or self.y >= maxPosition.y)
     def toIndex(self,maxPosition):
         return self.y * maxPosition.y + self.x
+    def __str__(self):
+        return "x : {} , y : {}".format(self.x,self.y)

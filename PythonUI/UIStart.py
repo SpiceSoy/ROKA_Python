@@ -3,6 +3,7 @@ from canvasUtill import *
 from EditUtill import *
 from naviContainer import *
 from RectContainer import *
+from Astar import *
 
 #메인 윈도우 생성
 mainWindow = Tk()
@@ -23,6 +24,8 @@ editMode = EditMode(EditState['noneEdit'])
 naviTileContainer = NaviTileContainer(canvasRectSetting.maxPosition)
 #RectContainer 생성
 rectContainer = RectContainer(drawCanvas,canvasRectSetting,naviTileContainer)
+#rectNavigationEngine 생성
+naviEngine = rectNavigationEngine(rectContainer,naviTileContainer)
 
 #툴 프레임 생성
 toolFrame = Frame(mainWindow,background='black')
@@ -53,7 +56,6 @@ def canavsClicked(event):
     if editMode.state != EditState['noneEdit']:
         rectContainer.isClicked(event,editMode.state)
 def canvasMotioned(event):
-
     temp = checkClickedPosition(Position(event.x,event.y),canvasRectSetting)
     clickDebugText.configure(
         text = str(event.x) + " , " + str(event.y) + " 위치 클릭 \n " 
@@ -69,6 +71,9 @@ drawCanvas.bind("<B1-Motion>",canvasMotioned)
 #스타트 버튼 생성
 startButton = Button(toolFrame,text="시작")
 startButton.pack(fill='x')
+def startButtonFunc():
+    naviEngine.start()
+startButton.configure(command=startButtonFunc)
 
 #모드 체인지 버튼 생성
 modeButton = Button(toolFrame,text="벽 편집하기")

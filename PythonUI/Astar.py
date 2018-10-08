@@ -1,7 +1,7 @@
+from soyDebug import printDebug
 from naviContainer import *
 
-aroundRelativePostion = 
-(
+aroundRelativePostion = (
     Position(-1,-1), #왼쪽위
     Position(0,-1),  #위
     Position(1,-1),  #오른쪽위
@@ -18,22 +18,29 @@ class rectNavigationEngine:
         self.naviContainer = naviContainer
         self.openNodeList = list()
         self.closedNodeList = list()
-    def getPassableList(self,x,y):
-        if x < 0 or x >= self.maxX or y < 0 or y >= self.maxY:
-            return None
-        else:
-            targetNode = self.getPosition(x,y)
-            if targetNode.isPassable():
-                return targetNode
-            else:
-                return None
+    def start(self):
+        temp = self.getPassableNodeList(self.naviContainer.getStartPoint())
+        printDebug('passableResult',str(len(temp)))
+    def getPassableNodeList(self,targetNode):
+        tempOpenNodeList = list()
+        tempOpenPostionList = self.getValidAroundPosition(targetNode)
+        for pos in tempOpenPostionList:
+            tempNode = self.naviContainer.getPosition(pos)
+            if tempNode.isPassable():
+                tempOpenNodeList.append(tempNode)
+            printDebug('getPassableNodeList',str(pos) + " / Result : " + str(tempNode.isPassable()))
+        return tempOpenNodeList
+    
+    # 이게문제
     def getValidAroundPosition(self,targetNode):
         tempOpenPostionList = list()
-        centerPos = PosDictToTuple(targetNode.getPosition())
+        centerPos = targetNode.getPosition()
         for around in aroundRelativePostion:
+            _tempFlag = False
             tempPos = Position(around.x + centerPos.x , around.y + centerPos.y )
-            if tempPos.isValid():
+            if tempPos.isValid(self.rectContainer.canvasRectSetting.maxPosition):
                 tempOpenPostionList.append(tempPos)
+            printDebug('getValidAroundPosition',str(tempPos) + " / Result : " + str(tempPos.isValid(self.rectContainer.canvasRectSetting.maxPosition)))
         return tempOpenPostionList
             
 

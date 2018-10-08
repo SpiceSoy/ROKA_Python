@@ -32,7 +32,7 @@
         },
         {
             "label": "Fisrt Setting",
-            "dependsOn": ["Set Email", "Set Name","Set pip"],
+            "dependsOn": ["Set Email", "Set Name"],
             "problemMatcher": []
         }
     ]
