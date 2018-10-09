@@ -5,7 +5,7 @@ Python Folder in R.O.K.A
 
 네비게이션 만들기 진행상황
 - 완료
-- 해당 노드에서 이동 가능한 노드 찾기(getPassableNodeList)
+  - 해당 노드에서 이동 가능한 노드 찾기(getPassableNodeList)
   - 휴리스틱에 계산
 - 진행 중
   - 열린 목록에 추가(우선순위큐?)
