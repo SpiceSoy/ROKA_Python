@@ -13,3 +13,7 @@ class Position:
         return self.y * maxPosition.y + self.x
     def __str__(self):
         return "x : {} , y : {}".format(self.x,self.y)
+    def __add__(self,other):
+        return Position(self.x + other.x,self.y + other.y)
+    def __sub__(self,other):
+        return Position(self.x - other.x,self.y + other.y)

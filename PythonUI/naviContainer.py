@@ -12,7 +12,7 @@ class naviNode:
         self.state = state
         self.refreshFunc = refreshFunc
         #AstarEngine 이후 추가된 것
-        self.previousPassNode = naviNode(NodeState['None'])
+        self.previousPassNode = None
     def isPassable(self):
         return StatePassable[self.state]
     def isGoalPoint(self):
@@ -28,15 +28,36 @@ class naviNode:
         self.refreshFunc()
     def SetRefresher(self,refreshFunc):
         self.refreshFunc = refreshFunc
+    def __gt__(self,other):
+        return self.heuristicsValue > other.heuristicsValue
+
 
 class naviTile(naviNode):
     def __init__(self,index,maxPosition,state = NodeState['default']):
         super().__init__(state)
         self.position = indexToPosition(index,maxPosition)
         self.index = index
+        self.GPoint = -9999
+        self.HPoint = -9999
+        self.heuristicsValue = -9999
     def getPosition(self):
         return self.position
-
+    def setGPoint(self,startNode):
+        tempPos = (startNode.getPosition() - self.position)
+        if (tempPos.x == 0 or tempPos.y == 0) :
+            thisGPoint = 10
+        else:
+            thisGPoint = 14
+        self.GPoint = startNode.GPoint + thisGPoint
+    def setHPoint(self,goalNode):
+        goalPosition = goalNode.getPosition()
+        tempPos = self.position - goalPosition
+        self.HPoint = abs(tempPos.x) + abs(tempPos.y)
+    def setHeuristicsValue(self,startNode,goalNode):
+        self.setGPoint(self,startNode)
+        self.setHPoint(self,goalNode)
+        self.heuristicsValue = self.HPoint + self.GPoint
+        
 #StartPoint 와 GoalPoint 갯수를 한정하기 위한 플래그입니다.
 class NowPoint:
     def __init__(self):
